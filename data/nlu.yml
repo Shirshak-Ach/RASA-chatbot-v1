@@ -1,0 +1,73 @@
+version: "3.1"
+
+nlu:
+- intent: greet
+  examples: |
+    - hey
+    - hello
+    - hi
+    - hello there
+    - good morning
+    - good evening
+    - moin
+    - hey there
+    - let's go
+    - hey dude
+    - goodmorning
+    - goodevening
+    - good afternoon
+
+- intent: goodbye
+  examples: |
+    - cu
+    - good by
+    - cee you later
+    - good night
+    - bye
+    - goodbye
+    - have a nice day
+    - see you around
+    - bye bye
+    - see you later
+
+- intent: check_balance
+  examples: |
+    - what is my balance?
+    - can you tell me my account balance?
+    - balance enquiry
+
+- intent: transaction_history
+  examples: |
+    - can you show me my transaction history?
+    - transaction history
+    - last transaction
+
+- intent: affirm
+  examples: |
+    - yes
+    - correct
+    - that's right
+
+- intent: deny
+  examples: |
+    - no
+    - incorrect
+    - that's wrong
+
+- intent: provide_account_number
+  examples: |
+    - my account number is [1234](account_number)
+    - [5678](account_number) is my account number
+    - account number is [9012](account_number)
+
+- intent: provide_name
+  examples: |
+    - my name is [Shirshak](name)
+    - [Sudeep](name) is my name
+    - name is [Dipendra](name)
+
+- intent: provide_phone_number
+  examples: |
+    - my phone number is [9861667788](phone_number)
+    - [9812334455](phone_number) is my phone number
+    - phone number is [9746112233](phone_number)
