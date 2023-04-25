@@ -14,15 +14,27 @@ stories:
   - intent: check_balance
   - action: utter_ask_account_number
   - intent: provide_account_number
+    entities:
+    - account_number: 1234
+  - slot_was_set:
+    - account_number: 1234
   - action: action_receive_account_number
   - action: utter_ask_name
   - intent: provide_name
+    entities:
+    - name: Shirshak
+  - slot_was_set:
+    - name: Shirshak
   - action: action_recieve_name
   - action: utter_ask_phone_number
   - intent: provide_phone_number
+    entities:
+    - phone_number: 9861223344
+  - slot_was_set:
+    - phone_number: 9861223344
   - action: action_receive_phone_number
   - action: action_say_name_account_num_phone_num
-  - intent: affirm
+  - intent: affirm  
 
 - story: transaction history
   steps:

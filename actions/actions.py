@@ -41,9 +41,9 @@ class ActionReceiveAccountNumber(Action):
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
 
-        text = tracker.latest_message['text']
-        dispatcher.utter_message(text=f"I'll remember your account number which is : {text}!")
-        return [SlotSet("account_number", text)]
+        account_number = tracker.get_slot['account_number']
+        dispatcher.utter_message(text=f"I'll remember your account number which is : {account_number}!")
+        return [SlotSet("account_number", account_number)]
 
 class ActionReceiveName(Action):
 
@@ -54,9 +54,9 @@ class ActionReceiveName(Action):
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
 
-        text = tracker.latest_message['text']
-        dispatcher.utter_message(text=f"I'll remember your name {text}!")
-        return [SlotSet("name", text)]
+        name = tracker.get_slot['name']
+        dispatcher.utter_message(text=f"I'll remember your name {name}!")
+        return [SlotSet("name", name)]
 
 class ActionReceivePhoneNumber(Action):
 
@@ -67,9 +67,9 @@ class ActionReceivePhoneNumber(Action):
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
 
-        text = tracker.latest_message['text']
-        dispatcher.utter_message(text=f"I'll remember your phone number, {text}!")
-        return [SlotSet("phone_number", text)]
+        phone_number = tracker.get_slot['phone_number']
+        dispatcher.utter_message(text=f"I'll remember your phone number, {phone_number}!")
+        return [SlotSet("phone_number", phone_number)]
 
 
 class ActionSayNameAccountNumPhoneNum(Action):
