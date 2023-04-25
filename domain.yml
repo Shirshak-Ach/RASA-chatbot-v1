@@ -1,10 +1,27 @@
 version: "3.1"
 
+config:
+  store_entities_as_slots: true 
+
 intents:
-  - greet
-  - goodbye
-  - check_balance
-  - transaction_history
+- greet:
+    use_entities: true
+- goodbye:
+    use_entities: true
+- check_balance:
+    use_entities: true
+- transaction_history:
+    use_entities: true
+- provide_account_number:
+    use_entities: true
+- provide_name:
+    use_entities: true
+- provide_phone_number:
+    use_entities: true
+- affirm:
+    use_entities: true
+- deny:
+    use_entities: true
 
 entities:
   - account_number
@@ -15,21 +32,17 @@ slots:
   account_number:
     type: text
     mappings:
-      - type: from_entity
-        entity: account_number
-      - type: from_text
+      - type: custom
+
   name:
     type: text
     mappings:
-      - type: from_entity
-        entity: name
-      - type: from_text
+      - type: custom
+
   phone_number:
     type: text
     mappings:
-      - type: from_entity
-        entity: phone_number
-      - type: from_text
+      - type: custom
 
 
 responses:
@@ -38,9 +51,6 @@ responses:
 
   utter_goodbye:
   - text: "Goodbye! Have a great day."
-
-  utter_check_balance:
-  - text: "Dear {name}, your {account_number} has a balance of Rs. 1000."
 
   utter_transaction_history:
   - text: "I'm sorry, I do not have access to your transaction history at this time."
@@ -54,11 +64,19 @@ responses:
   utter_ask_phone_number:
   - text: "Please provide your phone number."
 
-  utter_confirm_details:
-  - text: "Please confirm if the following details are correct - Name: {name}, Account Number: {account_number}, Phone Number: {phone_number}. Type 'yes' or 'no'."
-
   utter_invalid_input:
   - text: "I'm sorry, I did not understand that. Please try again."
+
+
+
+actions:
+- action_receive_account_number
+- action_recieve_name
+- action_receive_phone_number
+- action_say_name_account_num_phone_num
+
+
+
 
 session_config:
   session_expiration_time: 60

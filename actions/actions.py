@@ -25,27 +25,68 @@
 #         dispatcher.utter_message(text="Hello World!")
 #
 #         return []
-from typing import Any,Text,Dict,List
+
+from typing import Any, Text, Dict, List
+
+from rasa_sdk.events import SlotSet
 from rasa_sdk import Action, Tracker
 from rasa_sdk.executor import CollectingDispatcher
 
-class ActionCheckBalance(Action):
+class ActionReceiveAccountNumber(Action):
+
     def name(self) -> Text:
-        return "action_check_balance"
+        return "action_receive_account_number"
 
     def run(self, dispatcher: CollectingDispatcher,
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+
+        text = tracker.latest_message['text']
+        dispatcher.utter_message(text=f"I'll remember your account number which is : {text}!")
+        return [SlotSet("account_number", text)]
+
+class ActionReceiveName(Action):
+
+    def name(self) -> Text:
+        return "action_receive_name"
+
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+
+        text = tracker.latest_message['text']
+        dispatcher.utter_message(text=f"I'll remember your name {text}!")
+        return [SlotSet("name", text)]
+
+class ActionReceivePhoneNumber(Action):
+
+    def name(self) -> Text:
+        return "action_receive_phone_number"
+
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+
+        text = tracker.latest_message['text']
+        dispatcher.utter_message(text=f"I'll remember your phone number, {text}!")
+        return [SlotSet("phone_number", text)]
+
+
+class ActionSayNameAccountNumPhoneNum(Action):
+
+    def name(self) -> Text:
+        return "action_say_name_account_num_phone_num"
+
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+        
         account_number = tracker.get_slot("account_number")
         name = tracker.get_slot("name")
+        phone_number = tracker.get_slot("phone_number")
 
-        # Check if account number is valid
-        if account_number in ["1234", "5678", "9012"]:
-            balance = 1000
-            response = f"Dear {name}, your {account_number} has a balance of Rs. {balance}."
+        if not name:
+            dispatcher.utter_message(text="Sorry But you haven't provided details.")
         else:
-            response = "I'm sorry, I could not find that account number in our system."
-
-        dispatcher.utter_message(text=response)
-
+            dispatcher.utter_message(text=f"Your name is {name}! Your account number is: {account_number}. And your phone number is: {phone_number}")
         return []

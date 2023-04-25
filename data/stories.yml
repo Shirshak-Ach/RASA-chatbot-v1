@@ -14,11 +14,15 @@ stories:
   - intent: check_balance
   - action: utter_ask_account_number
   - intent: provide_account_number
+  - action: action_receive_account_number
   - action: utter_ask_name
   - intent: provide_name
-  - action: utter_confirm_details
+  - action: action_recieve_name
+  - action: utter_ask_phone_number
+  - intent: provide_phone_number
+  - action: action_receive_phone_number
+  - action: action_say_name_account_num_phone_num
   - intent: affirm
-  - action: utter_check_balance
 
 - story: transaction history
   steps:
